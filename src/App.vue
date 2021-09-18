@@ -1,16 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Button text="El boton porque el card aun no está" @click="mostrarLog"></Button>
+  <Card></Card>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Button from './components/Button.vue'
+import Card from './components/Card.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Button,
+    Card
+  },
+    methods:{
+      mostrarLog(){
+        console.log("Si funciono");
+      }
+    }
+  
 }
 </script>
 
