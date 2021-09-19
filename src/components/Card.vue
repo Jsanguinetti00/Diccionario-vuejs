@@ -1,10 +1,13 @@
 <template>
-  <div class="cardInfo">
-      <h4>Word:</h4>
+  <div class="cardInfo" v-for="item in list" :key="item">
+      <h4>Word: {{item.words}}</h4>
       <div>
           Meanings:
           <ul style='listStyle:none'>
-              <li v-for="item in props" :key="item">{{ props}}</li>
+              <li >
+                  <div style='marginBottom: 10px'> <span className="badge bg-primary"> Definition: </span> {{item.definition}} </div>
+                                    <div> <span className="badge bg-secondary"> Ejemplo: </span> {{item.example}} </div>
+              </li>
           </ul>
       </div>
   </div>
@@ -13,13 +16,9 @@
 <script>
 export default {
     name:'Card',
-    // props:{
-    //     word:String,
-    //     meaning: String,
-    //     phonetich: String,
-    //     definition: String
-    // }
-    
+    props:{
+       
+    }
 }
 </script>
 
