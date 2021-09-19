@@ -1,6 +1,6 @@
 <template>
   <Button text="El boton porque el card aun no está" @click="mostrarLog"></Button>
-  <Card></Card>
+  <Card definition="Una definicion" example="Un ejemplo de uso"></Card>
 </template>
 
 <script>

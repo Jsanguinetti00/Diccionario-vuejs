@@ -15,7 +15,8 @@ export default {
 
 <style scoped>
     .styleButton{
-        background: linear-gradient(70deg, rgb(194,113,237), rgb(101, 73, 221));
+        /* background: linear-gradient(70deg, rgb(194,113,237), rgb(101, 73, 221)); */
+        background: linear-gradient(70deg, rgb(112, 175, 141), mediumseagreen);
         border: none;
         border-radius: 50pt;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
