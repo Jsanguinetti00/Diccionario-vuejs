@@ -1,31 +1,34 @@
 <template>
-
   <Header name="Mi diccionario Online"></Header>
-    <div class="header-container">
-      <Dropdowm
-        label="Lenguaje"
-        @selected="getSelectedValueFromDropdown"
-        :defaultValue="dropdown.selectedValue"
-        :dataopt="dropdown.optlang"
-      ></Dropdowm>
-      <InputSearch @on-search="getPhraseFromInput" @on-reset="getResetCard"></InputSearch>
-    </div>
-    <center>
-      <h2>Resultados</h2>
-      <Card v-for="(item, index) in definitions"  :key="index" :definition="item.definition" :example="item.example"></Card>
-    </center>
-
-
-
-
+  <div class="header-container">
+    <Dropdowm
+      label="Lenguaje"
+      @selected="getSelectedValueFromDropdown"
+      :defaultValue="dropdown.selectedValue"
+      :dataopt="dropdown.optlang"
+    ></Dropdowm>
+    <InputSearch
+      @on-search="getPhraseFromInput"
+      @on-reset="getResetCard"
+    ></InputSearch>
+  </div>
+  <center>
+    <h2>Resultados</h2>
+    <Card
+      v-for="(item, index) in definitions"
+      :key="index"
+      :definition="item.definition"
+      :example="item.example"
+    ></Card>
+  </center>
 </template>
 
 <script>
-
 import Card from "./components/Card.vue";
 import Dropdowm from "./components/Dropdown.vue";
 import InputSearch from "./components/InputSearch.vue";
 import Header from "./components/Header.vue";
+import axios from 'axios';
 
 export default {
   name: "App",
@@ -34,7 +37,6 @@ export default {
     Dropdowm,
     InputSearch,
     Header,
-
   },
 
   data() {
@@ -53,36 +55,42 @@ export default {
           },
         ],
       },
-      catchlang:'',
-      definitions : []
+      catchlang: "",
+      definitions: [],
     };
   },
   methods: {
-    mostrarLog() {
-      console.log("Si funciono");
-    },
-    getResetCard(value){
-      this.definitions = value;
+    getResetCard() {
+      this.definitions = [];
     },
 
     /* Esta funcion es el callback que recibe o cacha los valores establecidos con el $emit en el componente hijo */
     getSelectedValueFromDropdown(value) {
-      this.catchlang = value ;
+      this.catchlang = value;
     },
 
-    
-    getPhraseFromInput(word){
-      this.axios.get(`https://api.dictionaryapi.dev/api/v2/entries/${this.catchlang}/${word}`)
-      .then(response=>{
-        console.log(response.data);
-        this.definitions = response.data[0].meanings[0].definitions;
-      }).catch(err=>{
-        console.error(`Title ${err.response.data.title} \n Message: ${err.response.data.message}`);
-      })
-    }
-
-    
-  }
+    getPhraseFromInput(word) {
+      if (word !== "") {
+        axios
+          .get(
+            `https://api.dictionaryapi.dev/api/v2/entries/${this.catchlang}/${word}`
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.definitions = response.data[0].meanings[0].definitions;
+          })
+          .catch((err) => {
+            console.error(
+              `Title ${err.response.data.title} \n Message: ${err.response.data.message}`
+            );
+          });
+      }
+      else
+      {
+        alert("You should type something in search input");
+      }
+    },
+  },
 };
 </script>
 
@@ -96,7 +104,7 @@ export default {
   margin-top: 60px;
 }
 
-.header-container{
+.header-container {
   min-width: 100vh;
   display: flex;
   flex-direction: row;

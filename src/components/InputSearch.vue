@@ -7,36 +7,39 @@
         className="button"
         >
         <font-awesome-icon
-          :icon="['fas', 'search']"
+          :icon="faSearch"
         />
       </button>
     </div>
 
-    <Button @click="reset" text="Reset" />
+    <Button @click="handleReset" text="Reset" />
   </div>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 import Button from "./Button.vue";
 export default {
   name: "InputSearch",
   data() {
     return {
+      faSearch,
       inputSearch: "",
-      resetCard:[]
     };
   },
   components: {
+    FontAwesomeIcon,
     Button,
   },
   methods: {
     handleSearch(){
-        // Aqui sacamos el valor de tu input para cacharlo desde afuera
         this.$emit('on-search', this.inputSearch);
     },
-    reset() {
+    handleReset() {
       this.inputSearch = "";
-      this.$emit ('on-reset', this.resetCard);
+      this.$emit ('on-reset');
     },
   },
 };
