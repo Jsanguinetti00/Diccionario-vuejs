@@ -1,5 +1,5 @@
 <template>
-  <button class="styleButton shadow">
+  <button class="styleButton shadow" @click="inputValue(text)">
       {{text}}
   </button>
 </template>
@@ -9,6 +9,10 @@ export default {
     name: 'Button',
     props:{
         text:String
+    },methods:{
+        inputValue(value){
+            this.$emit('textValue',value)
+        }   
     }
 }
 </script>

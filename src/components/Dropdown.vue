@@ -15,9 +15,15 @@
 export default {
   name: "Dropdown",
   props: {
-    value: String,
+    defaultValue : String,
     label: String,
     dataopt: Array,
+  },
+  beforeMount(){
+    if(this.defaultValue !== undefined){
+      this.selectedValue = this.defaultValue;
+      this.$emit('selected', this.selectedValue);
+    }
   },
   data(){
     return{
@@ -53,7 +59,7 @@ export default {
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 30%);
   margin: 0px 5px;
   cursor: pointer;
-  outline: none
+  outline: none;
 }
 
 .dropbtn:active {
